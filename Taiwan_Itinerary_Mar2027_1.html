@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Taiwan Itinerary — March 7–13, 2027</title>
+<style>
+  :root{
+    --pink:#f6a8c0;
+    --pink-dark:#e2779e;
+    --pink-light:#fdf1f5;
+    --green:#7fae7f;
+    --ink:#2e2a2e;
+    --muted:#7a7178;
+    --card:#ffffff;
+    --line:#f0d9e2;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:'Segoe UI',Helvetica,Arial,sans-serif;
+    background:linear-gradient(180deg,#fff8fa 0%,#fdf1f5 100%);
+    color:var(--ink);
+    line-height:1.55;
+  }
+  .wrap{max-width:960px;margin:0 auto;padding:0 20px 60px;}
+  header.hero{
+    background:linear-gradient(135deg,#f9c4d6,#f6a8c0 45%,#f3d9c4);
+    padding:56px 24px 48px;
+    text-align:center;
+    color:#5a2f42;
+    border-bottom-left-radius:40px;
+    border-bottom-right-radius:40px;
+    margin-bottom:34px;
+  }
+  header.hero h1{
+    font-size:2.2rem;
+    margin:0 0 6px;
+    letter-spacing:.5px;
+  }
+  header.hero p{margin:4px 0;font-size:1.05rem;color:#6b3a4f;}
+  header.hero .dates{
+    display:inline-block;
+    margin-top:14px;
+    background:rgba(255,255,255,.55);
+    padding:8px 20px;
+    border-radius:999px;
+    font-weight:600;
+    font-size:.95rem;
+  }
+  .flights{
+    display:flex;
+    gap:16px;
+    flex-wrap:wrap;
+    justify-content:center;
+    margin-top:26px;
+  }
+  .flight-card{
+    background:rgba(255,255,255,.7);
+    border-radius:14px;
+    padding:14px 20px;
+    font-size:.88rem;
+    min-width:230px;
+    text-align:left;
+  }
+  .flight-card b{display:block;font-size:.95rem;margin-bottom:4px;color:#5a2f42;}
+  h2.day-title{
+    font-size:1.3rem;
+    color:var(--pink-dark);
+    border-left:6px solid var(--pink);
+    padding-left:14px;
+    margin:44px 0 4px;
+  }
+  .day-sub{color:var(--muted);font-size:.9rem;padding-left:20px;margin-bottom:18px;}
+  .day-card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:22px 26px;
+    box-shadow:0 4px 14px rgba(226,119,158,.08);
+  }
+  .theme-tag{
+    display:inline-block;
+    background:var(--pink-light);
+    color:var(--pink-dark);
+    border:1px solid var(--pink);
+    font-size:.75rem;
+    font-weight:700;
+    padding:3px 12px;
+    border-radius:999px;
+    margin-bottom:14px;
+    letter-spacing:.4px;
+    text-transform:uppercase;
+  }
+  .activity{
+    display:flex;
+    gap:14px;
+    padding:10px 0;
+    border-bottom:1px dashed var(--line);
+  }
+  .activity:last-child{border-bottom:none;}
+  .time{
+    flex:0 0 92px;
+    font-weight:700;
+    color:var(--pink-dark);
+    font-size:.85rem;
+    padding-top:2px;
+  }
+  .activity-body p{margin:0 0 4px;}
+  .activity-body .desc{color:var(--muted);font-size:.88rem;margin-bottom:4px;}
+  .cost{
+    display:inline-block;
+    background:#eef6ee;
+    color:#3f6b3f;
+    font-size:.78rem;
+    font-weight:700;
+    padding:2px 10px;
+    border-radius:8px;
+  }
+  .cost.free{background:#f1f1f1;color:#666;}
+  table.costtable{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:16px;
+    font-size:.92rem;
+  }
+  table.costtable th, table.costtable td{
+    padding:10px 12px;
+    border-bottom:1px solid var(--line);
+    text-align:left;
+  }
+  table.costtable th{
+    background:var(--pink-light);
+    color:var(--pink-dark);
+    font-size:.82rem;
+    text-transform:uppercase;
+    letter-spacing:.4px;
+  }
+  table.costtable tr:last-child td{border-bottom:none;}
+  .total-row td{font-weight:800;font-size:1rem;background:#fdf1f5;}
+  section.summary{
+    margin-top:56px;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:26px 30px;
+    box-shadow:0 4px 14px rgba(226,119,158,.08);
+  }
+  section.summary h2{color:var(--pink-dark);margin-top:0;}
+  .note-box{
+    background:#fff6ea;
+    border:1px solid #f0dcaf;
+    border-radius:12px;
+    padding:16px 20px;
+    font-size:.87rem;
+    color:#6b5a2e;
+    margin-top:24px;
+  }
+  .note-box b{color:#5a4a20;}
+  footer{
+    text-align:center;
+    color:var(--muted);
+    font-size:.8rem;
+    margin-top:40px;
+  }
+  .legend{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin:18px 0 0;
+    font-size:.78rem;
+    color:var(--muted);
+  }
+  .legend span{
+    background:var(--pink-light);
+    padding:3px 10px;
+    border-radius:8px;
+  }
+
+  /* ---- Tab navigation ---- */
+  .tabbar{
+    position:sticky;
+    top:0;
+    z-index:20;
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+    justify-content:center;
+    background:rgba(253,241,245,.95);
+    backdrop-filter:blur(6px);
+    padding:12px 10px;
+    border-radius:14px;
+    margin-bottom:10px;
+    box-shadow:0 2px 10px rgba(226,119,158,.12);
+  }
+  .tab-btn{
+    border:1px solid var(--pink);
+    background:#fff;
+    color:var(--pink-dark);
+    font-weight:700;
+    font-size:.82rem;
+    padding:8px 14px;
+    border-radius:999px;
+    cursor:pointer;
+    transition:.15s;
+    white-space:nowrap;
+  }
+  .tab-btn:hover{background:var(--pink-light);}
+  .tab-btn.active{
+    background:var(--pink-dark);
+    border-color:var(--pink-dark);
+    color:#fff;
+  }
+
+  /* ---- Collapsible day cards ---- */
+  details.day-block{
+    margin-top:26px;
+    scroll-margin-top:80px;
+  }
+  details.day-block summary{
+    list-style:none;
+    cursor:pointer;
+  }
+  details.day-block summary::-webkit-details-marker{display:none;}
+  .day-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:14px;
+    padding:16px 22px;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:14px;
+    box-shadow:0 3px 10px rgba(226,119,158,.08);
+  }
+  details.day-block[open] .day-header{
+    border-bottom-left-radius:0;
+    border-bottom-right-radius:0;
+    box-shadow:none;
+  }
+  .day-header-text h2.day-title{
+    margin:0;
+    padding-left:0;
+    border-left:none;
+    font-size:1.15rem;
+  }
+  .day-header-text .day-sub{
+    margin:2px 0 0;
+    padding-left:0;
+  }
+  .chevron{
+    flex:0 0 auto;
+    width:30px;
+    height:30px;
+    border-radius:50%;
+    background:var(--pink-light);
+    color:var(--pink-dark);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:1rem;
+    transition:transform .2s ease;
+  }
+  details.day-block[open] .chevron{transform:rotate(180deg);}
+  details.day-block .day-card{
+    border-top:none;
+    border-top-left-radius:0;
+    border-top-right-radius:0;
+    margin-top:0;
+  }
+</style>
+<script>
+  function scrollToDay(id){
+    document.querySelectorAll('details.day-block').forEach(function(d){
+      d.open = (d.id === id);
+    });
+    document.querySelectorAll('.tab-btn').forEach(function(b){
+      b.classList.toggle('active', b.getAttribute('data-target') === id);
+    });
+    var el = document.getElementById(id);
+    if(el){ el.scrollIntoView({behavior:'smooth', block:'start'}); }
+  }
+  function expandAll(){
+    document.querySelectorAll('details.day-block').forEach(function(d){ d.open = true; });
+  }
+  function collapseAll(){
+    document.querySelectorAll('details.day-block').forEach(function(d){ d.open = false; });
+  }
+</script>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <h1>🌸 Taiwan Getaway for Two 🌸</h1>
+  <p>Cherry Blossoms · Countryside · City Tour · Food Trip</p>
+  <div class="dates">March 7 – 13, 2027 · 7 Days / 6 Nights</div>
+  <div class="flights">
+    <div class="flight-card">
+      <b>✈️ MNL → TPE (5J 312)</b>
+      Sun, 7 Mar 2027<br>
+      Depart Manila (NAIA T3) 6:35 AM<br>
+      Arrive Taipei Taoyuan (T1) 9:05 AM
+    </div>
+    <div class="flight-card">
+      <b>✈️ TPE → MNL (5J 313)</b>
+      Sat, 13 Mar 2027<br>
+      Depart Taoyuan (T1) 10:20 AM<br>
+      Arrive Manila (NAIA T3) 1:05 PM
+    </div>
+  </div>
+</header>
+
+<div class="tabbar">
+  <button class="tab-btn active" data-target="day1" onclick="scrollToDay('day1')">Day 1 · Arrival</button>
+  <button class="tab-btn" data-target="day2" onclick="scrollToDay('day2')">Day 2 · City</button>
+  <button class="tab-btn" data-target="day3" onclick="scrollToDay('day3')">Day 3 · Sakura</button>
+  <button class="tab-btn" data-target="day4" onclick="scrollToDay('day4')">Day 4 · Jiufen</button>
+  <button class="tab-btn" data-target="day5" onclick="scrollToDay('day5')">Day 5 · Wuling</button>
+  <button class="tab-btn" data-target="day6" onclick="scrollToDay('day6')">Day 6 · Maokong</button>
+  <button class="tab-btn" data-target="day7" onclick="scrollToDay('day7')">Day 7 · Departure</button>
+  <button class="tab-btn" onclick="expandAll()">Expand All</button>
+  <button class="tab-btn" onclick="collapseAll()">Collapse All</button>
+</div>
+
+<!-- DAY 1 -->
+<details class="day-block" id="day1" open>
+<summary>
+  <div class="day-header">
+    <div class="day-header-text">
+      <h2 class="day-title">Day 1 · Sunday, March 7</h2>
+      <p class="day-sub">Arrival in Taipei &amp; Ximending City Vibes</p>
+    </div>
+    <div class="chevron">▾</div>
+  </div>
+</summary>
+<div class="day-card">
+  <span class="theme-tag">Arrival · City</span>
+  <div class="activity">
+    <div class="time">9:05 AM</div>
+    <div class="activity-body">
+      <p>Land at Taoyuan Airport (T1), clear immigration &amp; get a <b>SIM card / eSIM</b> and an <b>EasyCard</b> for transit.</p>
+      <div class="desc">Airport MRT to Taipei Main Station (~40 min)</div>
+      <span class="cost">₱1,300 (SIM + 2 EasyCards + Airport MRT, for 2)</span>
+    </div>
+  </div>
+  <div class="activity">
+    <div class="time">11:30 AM</div>
+    <div class="activity-body">
+      <p>Hotel check-in / baggage drop (Ximending or Taipei Main Station area recommended)</p>
+      <div class="desc">Early check-in may not be available — bags can be stored at hotel</div>
+      <span class="cost free">Included in hotel</span>
+    </div>
+  </div>
+  <div class="activity">
+    <div class="time">12:30 PM</div>
+    <div class="activity-body">
+      <p>Lunch: Beef noodle soup at a local shop near Ximending</p>
+      <span class="cost">₱600 (2 pax)</span>
+    </div>
+  </div>
+  <div class="activity">
+    <div class="time">2:00 PM</div>
+    <div class="activity-body">
+      <p>Stroll <b>Ximending</b> (Taipei's Harajuku) — shopping street, murals, cafés</p>
+      <span class="cost free">Free to explore</span>
+    </div>
+  </div>
+  <div class="activity">
+    <div class="time">4:00 PM</div>
+    <div class="activity-body">
+      <p><b>Longshan Temple</b> — historic temple, beautiful architecture and incense rituals</p>
+      <span class="cost free">Free entry</span>
+    </div>
+  </div>
+  <div class="activity">
+    <div class="time">7:00 PM</div>
+    <div class="activity-body">
+      <p>Dinner &amp; dessert crawl at <b>Ximending night streets</b> (try mango shaved ice, oyster omelet, bubble tea)</p>
+      <span class="cost">₱900 (2 pax)</span>
+    </div>
+  </div>
+</div>
+</details>
+
+<!-- DAY 2 -->
+<details class="day-block" id="day2">
+<summary>
+  <div class="day-header">
+    <div class="day-header-text">
+      <h2 class="day-title">Day 2 · Monday, March 8</h2>
+      <p class="day-sub">Taipei City Tour</p>
+    </div>
+    <div class="chevron">▾</div>
+  </div>
+</summary>
+<div class="day-card">
+  <span class="theme-tag">City Tour</span>
+  <div class="activity">
+    <div class="time">8:30 AM</div>
+    <div class="activity-body">
+      <p>Breakfast near hotel — soy milk &amp; youtiao / danbing</p>
+      <span class="cost">₱350 (2 pax)</span>
+    </div>
+  </div>
+  <div class="activity">
+    <div class="time">9:30 AM</div>
+    <div class="activity-body">
+      <p><b>Chiang Kai-shek Memorial Hall</b> — changing of the guard ceremony, gardens</p>
+      <span class="cost free">Free entry</span>
+    </div>
+  </div>
+  <div class="activity">
+    <div class="time">11:30 AM</div>
+    <div class="activity-body">
+      <p><b>Taipei 101</b> Observatory (89F) — panoramic city views</p>
+      <span class="cost">₱2,200 (2 tickets)</span>
+    </div>
+  </div>
+  <div class="activity">
+    <div class="time">1:30 PM</div>
+    <div class="activity-body">
+      <p>Lunch at <b>Din Tai Fung</b> (Taipei 101 branch) — famous xiaolongbao</p>
+      <span class="cost">₱2,000 (2 pax)</span>
+    </div>
+  </div>
+  <div class="activity">
+    <div class="time">3:30 PM</div>
+    <div class="activity-body">
+      <p><b>Elephant Mountain (Xiangshan)</b> short hike for a postcard skyline view of Taipei 101</p>
+      <span class="cost free">Free</span>
+    </div>
+  </div>
+  <div class="activity">
+    <div class="time">6:00 PM</div>
+    <div class="activity-body">
+      <p>Dinner &amp; stroll at <b>Raohe Street Night Market</b> — pepper buns, stinky tofu, skewers</p>
+      <span class="cost">₱900 (2 pax)</span>
+    </div>
+  </div>
+</div>
+</details>
+
+<!-- DAY 3 -->
+<details class="day-block" id="day3">
+<summary>
+  <div class="day-header">
+    <div class="day-header-text">
+      <h2 class="day-title">Day 3 · Tuesday, March 9</h2>
+      <p class="day-sub">Cherry Blossoms at Yangmingshan &amp; Beitou Hot Springs</p>
+    </div>
+    <div class="chevron">▾</div>
+  </div>
+</summary>
+<div class="day-card">
+  <span class="theme-tag">Cherry Blossoms</span>
+  <div class="activity">
+    <div class="time">8:00 AM</div>
+    <div class="activity-body">
+      <p>MRT to Jiantan Station, then bus (or Klook shuttle) up to <b>Yangmingshan National Park</b></p>
+      <div class="desc">Early March is prime late-bloom season for Yoshino / Fuji cherries near the Flower Clock &amp; Yangming Park</div>
+      <span class="cost">₱900 (round-trip transport, 2 pax)</span>
+    </div>
+  </div>
+  <div class="activity">
+    <div class="time">9:00 AM</div>
+    <div class="activity-body">
+      <p>Walk the <b>Yangmingshan Flower Clock &amp; Cherry Blossom Trail</b>, photos among the sakura</p>
+      <span class="cost free">Free entry to park</span>
+    </div>
+  </div>
+  <div class="activity">
+    <div class="time">11:30 AM</div>
+    <div class="activity-body">
+      <p>Visit <b>Tianyuan Temple</b> (New Taipei) — one of the most photogenic sakura tunnels in Taiwan</p>
+      <span class="cost">₱600 (transport, 2 pax)</span>
+    </div>
+  </div>
+  <div class="activity">
+    <div class="time">1:00 PM</div>
+    <div class="activity-body">
+      <p>Lunch near Beitou — local Taiwanese set meal</p>
+      <span class="cost">₱700 (2 pax)</span>
+    </div>
+  </div>
+  <div class="activity">
+    <div class="time">2:30 PM</div>
+    <div class="activity-body">
+      <p><b>Beitou Hot Spring</b> — relax at a public or private onsen (Thermal Valley + Beitou Museum optional)</p>
+      <span class="cost">₱2,000 (private onsen for 2, 1.5 hrs)</span>
+    </div>
+  </div>
+  <div class="activity">
+    <div class="time">6:30 PM</div>
+    <div class="activity-body">
+      <p>Dinner at <b>Shilin Night Market</b> — Taipei's largest night market, endless street food</p>
+      <span class="cost">₱900 (2 pax)</span>
+    </div>
+  </div>
+</div>
+</details>
+
+<!-- DAY 4 -->
+<details class="day-block" id="day4">
+<summary>
+  <div class="day-header">
+    <div class="day-header-text">
+      <h2 class="day-title">Day 4 · Wednesday, March 10</h2>
+      <p class="day-sub">Countryside Day Trip: Jiufen, Shifen &amp; Pingxi</p>
+    </div>
+    <div class="chevron">▾</div>
+  </div>
+</summary>
+<div class="day-card">
+  <span class="theme-tag">Countryside</span>
+  <div class="activity">
+    <div class="time">8:00 AM</div>
+    <div class="activity-body">
+      <p>Join a <b>Jiufen–Shifen–Pingxi day tour</b> or DIY via train/bus (recommended for ease)</p>
+      <span class="cost">₱3,600 (day tour, 2 pax, incl. transport &amp; guide)</span>
+    </div>
+  </div>
+  <div class="activity">
+    <div class="time">9:30 AM</div>
+    <div class="activity-body">
+      <p><b>Jiufen Old Street</b> — hillside lantern-lined alleys (Spirited Away vibes), taro balls &amp; tea houses</p>
+      <span class="cost free">Free to explore (snacks extra)</span>
+    </div>
+  </div>
+  <div class="activity">
+    <div class="time">12:00 PM</div>
+    <div class="activity-body">
+      <p>Lunch — A-Mei Tea House area or local Jiufen eatery</p>
+      <span class="cost">₱700 (2 pax)</span>
+    </div>
+  </div>
+  <div class="activity">
+    <div class="time">2:00 PM</div>
+    <div class="activity-body">
+      <p><b>Shifen Waterfall</b> and the famous <b>Shifen Old Street railway</b></p>
+      <span class="cost free">Free entry</span>
+    </div>
+  </div>
+  <div class="activity">
+    <div class="time">3:30 PM</div>
+    <div class="activity-body">
+      <p>Release a <b>sky lantern</b> at Shifen — write your wishes together</p>
+      <span class="cost">₱600 (1 lantern, 2 pax)</span>
+    </div>
+  </div>
+  <div class="activity">
+    <div class="time">7:00 PM</div>
+    <div class="activity-body">
+      <p>Return to Taipei, casual dinner near hotel</p>
+      <span class="cost">₱700 (2 pax)</span>
+    </div>
+  </div>
+</div>
+</details>
+
+<!-- DAY 5 -->
+<details class="day-block" id="day5">
+<summary>
+  <div class="day-header">
+    <div class="day-header-text">
+      <h2 class="day-title">Day 5 · Thursday, March 11</h2>
+      <p class="day-sub">Wuling Farm &amp; Central Taiwan Countryside (Cherry Blossoms)</p>
+    </div>
+    <div class="chevron">▾</div>
+  </div>
+</summary>
+<div class="day-card">
+  <span class="theme-tag">Countryside · Cherry Blossoms</span>
+  <div class="activity">
+    <div class="time">6:30 AM</div>
+    <div class="activity-body">
+      <p>Early departure via chartered tour/shuttle to <b>Wuling Farm</b> (Taichung/Nantou highlands) — one of Taiwan's most spectacular late-blooming cherry blossom spots, in peak season this time of year</p>
+      <span class="cost">₱5,400 (private/shared day tour incl. entrance permit, 2 pax)</span>
+    </div>
+  </div>
+  <div class="activity">
+    <div class="time">10:30 AM</div>
+    <div class="activity-body">
+      <p>Walk the pink cherry-tree-lined pathways, Taoshan Waterfall trail, tea plantations, mountain scenery</p>
+      <span class="cost free">Included in tour</span>
+    </div>
+  </div>
+  <div class="activity">
+    <div class="time">12:30 PM</div>
+    <div class="activity-body">
+      <p>Farm-style lunch (local mountain vegetables, trout)</p>
+      <span class="cost">₱900 (2 pax)</span>
+    </div>
+  </div>
+  <div class="activity">
+    <div class="time">2:30 PM</div>
+    <div class="activity-body">
+      <p>Visit nearby <b>Fushoushan Farm</b> or countryside orchard views before heading back</p>
+      <span class="cost free">Included in tour</span>
+    </div>
+  </div>
+  <div class="activity">
+    <div class="time">8:00 PM</div>
+    <div class="activity-body">
+      <p>Arrive back in Taipei, light dinner near hotel</p>
+      <span class="cost">₱600 (2 pax)</span>
+    </div>
+  </div>
+</div>
+</details>
+
+<!-- DAY 6 -->
+<details class="day-block" id="day6">
+<summary>
+  <div class="day-header">
+    <div class="day-header-text">
+      <h2 class="day-title">Day 6 · Friday, March 12</h2>
+      <p class="day-sub">Maokong Tea Hills, Shopping &amp; Final Food Trip</p>
+    </div>
+    <div class="chevron">▾</div>
+  </div>
+</summary>
+<div class="day-card">
+  <span class="theme-tag">City · Food Trip</span>
+  <div class="activity">
+    <div class="time">9:00 AM</div>
+    <div class="activity-body">
+      <p><b>Maokong Gondola</b> ride up to the tea hills — scenic cable car with glass-bottom option</p>
+      <span class="cost">₱600 (round trip, 2 pax)</span>
+    </div>
+  </div>
+  <div class="activity">
+    <div class="time">10:00 AM</div>
+    <div class="activity-body">
+      <p>Tea-tasting &amp; light brunch at a Maokong hillside tea house overlooking Taipei</p>
+      <span class="cost">₱1,400 (2 pax)</span>
+    </div>
+  </div>
+  <div class="activity">
+    <div class="time">1:00 PM</div>
+    <div class="activity-body">
+      <p>Head back to the city — free time for <b>souvenir shopping</b> (pineapple cakes, nougat, tea sets) at Dihua Street or Yongkang Street</p>
+      <span class="cost">₱2,500 (souvenirs, budget estimate)</span>
+    </div>
+  </div>
+  <div class="activity">
+    <div class="time">4:00 PM</div>
+    <div class="activity-body">
+      <p>Relax at a café in <b>Yongkang Street</b> — try the original mango shaved ice (Smoothie House)</p>
+      <span class="cost">₱600 (2 pax)</span>
+    </div>
+  </div>
+  <div class="activity">
+    <div class="time">6:30 PM</div>
+    <div class="activity-body">
+      <p>Farewell dinner — hotpot or a nicer sit-down Taiwanese restaurant to celebrate the trip</p>
+      <span class="cost">₱2,200 (2 pax)</span>
+    </div>
+  </div>
+  <div class="activity">
+    <div class="time">8:30 PM</div>
+    <div class="activity-body">
+      <p>Pack &amp; repack, last-minute convenience store snack run (get pineapple cakes for pasalubong)</p>
+      <span class="cost">₱1,000 (2 pax)</span>
+    </div>
+  </div>
+</div>
+</details>
+
+<!-- DAY 7 -->
+<details class="day-block" id="day7">
+<summary>
+  <div class="day-header">
+    <div class="day-header-text">
+      <h2 class="day-title">Day 7 · Saturday, March 13</h2>
+      <p class="day-sub">Departure</p>
+    </div>
+    <div class="chevron">▾</div>
+  </div>
+</summary>
+<div class="day-card">
+  <span class="theme-tag">Departure</span>
+  <div class="activity">
+    <div class="time">7:00 AM</div>
+    <div class="activity-body">
+      <p>Hotel check-out, Airport MRT to Taoyuan Airport (T1) — allow ~1 hr travel + buffer</p>
+      <span class="cost">₱650 (Airport MRT, 2 pax)</span>
+    </div>
+  </div>
+  <div class="activity">
+    <div class="time">10:20 AM</div>
+    <div class="activity-body">
+      <p>Depart Taipei Taoyuan (5J 313) → Arrive Manila NAIA T3 1:05 PM</p>
+      <span class="cost free">Flight already booked</span>
+    </div>
+  </div>
+</div>
+</details>
+
+<!-- COST SUMMARY -->
+<section class="summary">
+  <h2>💰 Estimated Cost Summary (for 2 people)</h2>
+  <table class="costtable">
+    <tr><th>Category</th><th>Estimated Cost (PHP)</th><th>Notes</th></tr>
+    <tr><td>Round-trip flights (5J 312/313)</td><td>Already booked</td><td>Not included below — add your actual fare</td></tr>
+    <tr><td>Accommodation (6 nights, mid-range hotel)</td><td>₱24,000 – ₱36,000</td><td>~₱4,000–6,000/night for a double room in Taipei</td></tr>
+    <tr><td>Local transport (MRT, EasyCard, Airport MRT)</td><td>₱3,600</td><td>Taipei MRT + Airport MRT rides</td></tr>
+    <tr><td>Day tours (Jiufen/Shifen/Pingxi + Wuling Farm)</td><td>₱9,000</td><td>Shared/private day tours for 2</td></tr>
+    <tr><td>Attractions &amp; activities (Taipei 101, onsen, gondola, temples)</td><td>₱5,300</td><td>Entrance fees &amp; experiences</td></tr>
+    <tr><td>Meals (7 days, 2 people)</td><td>₱13,000</td><td>Mix of street food, night markets &amp; sit-down meals</td></tr>
+    <tr><td>SIM/eSIM &amp; connectivity</td><td>₱1,300</td><td>2 SIM cards or 1 pocket wifi</td></tr>
+    <tr><td>Souvenirs &amp; shopping</td><td>₱2,500</td><td>Flexible budget item</td></tr>
+    <tr><td>Travel insurance (2 pax)</td><td>₱1,500</td><td>Recommended for international travel</td></tr>
+    <tr class="total-row"><td>Estimated Total (excluding flights &amp; hotel range midpoint)</td><td>≈ ₱66,200 – ₱78,200</td><td>For 2 people, 7 days / 6 nights</td></tr>
+  </table>
+  <div class="legend">
+    <span>💴 1 TWD ≈ ₱1.75–1.85 PHP (check current rate)</span>
+    <span>🏨 Hotel range assumes 3–4★ Taipei hotel</span>
+    <span>🚌 Tours assume joining shared group tours for savings</span>
+  </div>
+  <div class="note-box">
+    <b>Tips:</b> Book Wuling Farm cherry blossom entry permits in advance — they sell out fast during peak bloom. Cherry blossom timing shifts yearly by 1–2 weeks depending on weather, so check the Yangmingshan and Wuling Farm official bloom trackers closer to your travel date. Consider getting an <b>EasyCard</b> immediately at the airport — it works for MRT, buses, and even convenience stores. Since your return flight departs at 10:20 AM, plan to leave your hotel by 7:00 AM at the latest.
+  </div>
+</section>
+
+<footer>
+  Made for your Taiwan trip · March 7–13, 2027 · Enjoy the sakura, Manila to Taipei and back 🌸✈️
+</footer>
+
+</div>
+</body>
+</html>
